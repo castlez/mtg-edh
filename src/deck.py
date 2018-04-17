@@ -11,6 +11,10 @@ class Deck:
     def __init__(self, filename):
         cards_in_deck = []
         commander = None
+
+        # TODO: add a cache so you don't have to download every time
+
+        # open the file and get each card from the mtgsdk
         with open(filename, 'r') as deck_file:
             for raw_line in deck_file.readlines():
                 line = raw_line.split(' ')
