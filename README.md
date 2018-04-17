@@ -1,0 +1,2 @@
+# mtg-edh
+play edh
