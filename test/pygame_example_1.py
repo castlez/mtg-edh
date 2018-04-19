@@ -53,8 +53,8 @@ class PygView(object):
         while running:
             pos = pygame.mouse.get_pos()  # [width, height]
 
-            hand_button = self.draw_button("hand_button", (38, 160))
-            drawcard_button = self.draw_button("drawcard_button", (38, 360))
+            hand_button = (38, 160)
+            drawcard_button = (38, 360)
 
             draw_clicked = False
             hand_clicked = False
@@ -65,7 +65,7 @@ class PygView(object):
                     if self.check_collision_with_button(pos, drawcard_button):
                         self.hand.append(self.deck.pop())
                         draw_clicked = True
-                    elif self.check_collision_with_button(pos, hand_button):
+                    elif self.check_collision_with_button(pos, hand_button) and not show_hand:
                         hand_clicked = True
             if show_hand and not draw_clicked:
                 x = 50
@@ -77,6 +77,10 @@ class PygView(object):
                 show_hand = True
             elif show_hand and draw_clicked:
                 show_hand = False
+
+            if not show_hand:
+                self.draw_button("hand_button", hand_button)
+            self.draw_button("drawcard_button", (38, 360))
 
             milliseconds = self.clock.tick(self.fps)
             self.playtime += milliseconds / 1000.0
