@@ -15,12 +15,16 @@ License: Do What The Fuck You Want To Public License (WTFPL)
 """
 
 ####
-import os
+
+
+import pygame_sdl2
+pygame_sdl2.import_as_pygame()
 
 import pygame
 
+import os
 
-ROOT = os.path.dirname(os.path.dirname(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 
 class PygView(object):
@@ -63,10 +67,12 @@ class PygView(object):
                     running = False
                 elif event.type == pygame.MOUSEBUTTONUP:
                     if self.check_collision_with_button(pos, drawcard_button):
-                        self.hand.append(self.deck.pop())
+                        if self.deck:
+                            self.hand.append(self.deck.pop())
                         draw_clicked = True
                     elif self.check_collision_with_button(pos, hand_button) and not show_hand:
                         hand_clicked = True
+
             if show_hand and not draw_clicked:
                 x = 50
                 y = 100

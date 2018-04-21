@@ -1,2 +1,2 @@
-mtgsdk
 pygame
+pygame_sdl2
